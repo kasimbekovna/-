@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Товары</title>
+    <!-- Подключите здесь любые внешние стили CSS, если необходимо -->
+</head>
+<body>
+    <center>
+        <div class="container">
+            <form action="{% url 'search' %}" method="GET" class="search-form">
+                <input type="text" name="q" class="form-control" placeholder="Search">
+                <button type="submit" class="btn btn-primary">Поиск</button>
+            </form>
+            <div class="card" style="width: 18rem;">
+                <img src="{{ techno_id.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"></h5>
+                    <p class="card-text">{{ techno_id.title }}</p>
+                    <p class="card-text">{{ techno_id.description }}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        {% if post_id.music %}
+                            {% if post_id.music.url %}
+                                <audio controls>
+                                    <source src="{{ techno_id.music.url }}" type="audio/mp3">
+                                    Your browser does not support the audio tag.
+                                </audio>
+                            {% else %}
+                                <p>Error: The 'music' attribute has no file associated with it.</p>
+                            {% endif %}
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item"><iframe src="{{ techno_id.video }}" frameborder="0"></iframe></li>
+                    <li class="list-group-item"><p>{{ techno_id.category_techno }}</p></li>
+                    <a href="/techno/{{ i.id }}" class="btn btn-primary">подробнее</a>
+                    <button><a href="/techno/{{ techno_id.id }}/techno /">добавить комментарии</a></button>
+                    <button><a href="/techno/">Добавить</a></button>
+                    <button><a href="/create_review/">Добавить отзыв</a></button>
+                </ul>
+            </div>
+        </div>
+</body>
+</html>
